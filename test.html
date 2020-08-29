@@ -1,0 +1,118 @@
+<script>
+//字符转ascii码：用charCodeAt();
+//ascii码砖字符：用fromCharCode();
+//大写字母A 到Z 的值是从65 到90;
+//小写a到z 是从91 到 122;
+var x = 'xyxyXX',
+	y = {},
+	value = [],
+	result = '';
+for(let i =0;i<x.length;i++) {
+	if(y[x[i]]){
+		y[x[i]] += 1;
+	} else{
+		y[x[i]] = 1;
+	};
+};
+var num = {};
+for(var i in y){
+	if(value.indexOf(y[i])==-1){
+		value.push(y[i]);
+	};
+	if(num[y[i]]){
+		num[y[i]].push(i);
+	} else{
+		num[y[i]] = [i];
+	};
+};
+value = value.sort();
+
+for(let i=value.length-1;i>-1;i--){
+	let data = num[value[i]].sort(function(a, b){
+		return b.charCodeAt() - a.charCodeAt();
+	});
+	for(let j=0;j<data.length;j++){
+		result += data[j] +':'+value[i]+';'
+	}
+};
+
+
+
+var str = 'I love you yu\ny',
+str = str.split('\n');
+var re = str[1]+"+[A-Za-z]*";
+var reg = new RegExp(re, 'g');
+// console.log(reg)
+var data = str[0].match(reg);
+data = data.join(' ')
+// console.log(data)
+
+
+var str = 'abC124ACb',
+	reg0 = /([a-zA-Z]{1})+([1-9])/g;
+	reg1 = /([1-9])+([a-zA-Z]{1})/g;
+	reg2 = /([1-9])+([a-zA-Z]{1})+([1-9])/g,
+	max = 0,
+	data0 = str.match(reg0) || [],
+	data1 = str.match(reg1) || [],
+	data2 = str.match(reg2) || [];
+function compare(data){
+	for(let i=data.length-1;i>-1;i--){
+		if(data[i].length > max){
+			max = data[i].length;
+		};
+	};
+};
+// compare(data0);
+// compare(data1);
+// compare(data2);
+// console.log(max);
+
+
+function cssStyle2DomStyle(sName) {
+    if(sName[0] == '-'){
+        sName = sName.substring(1);
+    };
+    sName = sName.replace(/[-]+[a-zA-Z]{1}/g, function(a){
+        return a[1].toUpperCase();
+    });
+    return sName;
+};
+
+
+// 统计字符串中每个字符的出现频率，返回一个 Object，key 为统计字符，value 为出现频率
+// 1. 不限制 key 的顺序
+// 2. 输入的字符串参数不会为空
+// 3. 忽略空白字符
+function count(str) {
+	let i = 0,
+		len = str.length,
+		result = {};
+	for(; i<len; i++) {
+		if(str[i] && str[i]!==' '){
+			if(result[str[i]]){
+				result[str[i]] += 1;
+			} else{
+				result[str[i]] = 1;
+			};
+		};
+	};
+	return result;
+};
+// console.log(count('hello world'));
+var arr = [false, true, undefined, null, NaN, 0, 1, {}, {}, 'a', 'a', NaN];
+Array.prototype.uniq = function () {
+	var result = [];
+	for (var i = this.length - 1; i > -0; i--) {
+		if(result.indexOf(this[i]) == -1){
+			result.push(this[i])
+		};
+	};
+	console.log(result);
+	console.log(this)   
+};
+arr.uniq();
+</script>
+
+
+
